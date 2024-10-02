@@ -1,27 +1,44 @@
 #include <stdio.h>
 #include <string.h>
 
+#define NUM_ESTUDIANTES 2
+#define NUM_MATERIAS 2
+#define NUM_CALIF 6
+#define ESPACIO_CADENA 21
+
+
+void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], 
+                        char materi[NUM_MATERIAS][ESPACIO_CADENA], 
+                        float califiEstud[NUM_CALIF][NUM_MATERIAS],
+                        float promMaterEst[NUM_MATERIAS],
+                        float promEs,
+                        float califMinEst[NUM_MATERIAS],
+                        float califMaxEst[NUM_MATERIAS],
+                        float minEst,
+                        float maxEst);
+
+
+
 int main (int argc, char *argv[]) 
 {
-    const int numEstudiantes = 2, numMaterias = 2, numCalif=6, espacioCadena = 21, filasResultados=1;
     int longitudCadena, limpiadorBuffer;
 
-    float   califEst1[numCalif][numMaterias], promMateriasEst1[numMaterias],
-            califMinEst1[numMaterias],califMaxEst1[numMaterias];
+    float   califEst1[NUM_CALIF][NUM_MATERIAS], promMateriasEst1[NUM_MATERIAS],
+            califMinEst1[NUM_MATERIAS],califMaxEst1[NUM_MATERIAS];
 
     float promEst1=0, minEst1=0, maxEst1=0, min, max;
 
-    char estudiantes[numEstudiantes][espacioCadena], materias[numMaterias][espacioCadena];
+    char estudiantes[NUM_ESTUDIANTES][ESPACIO_CADENA], materias[NUM_MATERIAS][ESPACIO_CADENA];
 
 
     printf("----------------------------- REGISTRO DE ESTUDIANTES ----------------------------\n");
 
 
-    for (int i = 0; i < numEstudiantes; i++)
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
         printf("Ingrese el nombre y apellido o solo el nombre del estudiante %d (MAX 20 caracteres):\n", i+1);
         fflush(stdin);
-        fgets(estudiantes[i], espacioCadena+1, stdin);  //se suma 1 porque fgets deja un espacio para \0 además de \n  ....'\n''\0'
+        fgets(estudiantes[i], ESPACIO_CADENA+1, stdin);  //se suma 1 porque fgets deja un espacio para \0 además de \n  ....'\n''\0'
         
         longitudCadena = strlen(estudiantes[i]);
 
@@ -38,11 +55,11 @@ int main (int argc, char *argv[])
 
     printf("------------------------------ REGISTRO DE MATERIAS ------------------------------\n");
 
-    for (int i = 0; i < numMaterias; i++)
+    for (int i = 0; i < NUM_MATERIAS; i++)
     {
         printf("Ingrese el nombre de la materia %d (MAX 20 caracteres):\n", i+1);
         fflush(stdin);
-        fgets(materias[i], espacioCadena+1, stdin);
+        fgets(materias[i], ESPACIO_CADENA+1, stdin);
         
         longitudCadena = strlen(materias[i]);
 
@@ -59,10 +76,10 @@ int main (int argc, char *argv[])
 
 
     printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", estudiantes[0]);
-    for (int i = 0; i < numMaterias; i++)
+    for (int i = 0; i < NUM_MATERIAS; i++)
     {
         printf("-------------- Ingrese las calificaciones de %s\n", materias[i]);
-        for (int j = 0; j < numCalif; j++)
+        for (int j = 0; j < NUM_CALIF; j++)
         {
             scanf("%f", &califEst1[j][i]);
 
@@ -76,29 +93,29 @@ int main (int argc, char *argv[])
     }
 
     //----------------------CÁLCULO DE PROMEDIOS
-    for (int i = 0; i < numMaterias; i++)
+    for (int i = 0; i < NUM_MATERIAS; i++)
     {
-        for (int j = 0; j < numCalif; j++)
+        for (int j = 0; j < NUM_CALIF; j++)
         {
             promMateriasEst1[i]= promMateriasEst1[i]+califEst1[j][i];
         }
-        promMateriasEst1[i]=promMateriasEst1[i]/numCalif;
+        promMateriasEst1[i]=promMateriasEst1[i]/NUM_CALIF;
 
         promEst1 = promEst1 + promMateriasEst1[i];
     }
 
-        promEst1 =promEst1/numMaterias;
+        promEst1 =promEst1/NUM_MATERIAS;
 
 
 
 
     //----------------------CÁLCULO DE MIN Y MAX
-    for (int i = 0; i < numMaterias; i++)
+    for (int i = 0; i < NUM_MATERIAS; i++)
     {
         min=10;
         max=0;
 
-        for (int j = 0; j < numCalif; j++)
+        for (int j = 0; j < NUM_CALIF; j++)
         {
             if (califEst1[j][i]<min)
             {
@@ -116,9 +133,9 @@ int main (int argc, char *argv[])
     min=10;
     max=0;
 
-    for (int i = 0; i < numMaterias; i++)
+    for (int i = 0; i < NUM_MATERIAS; i++)
     {
-        for (int j = 0; j < numCalif; j++)
+        for (int j = 0; j < NUM_CALIF; j++)
         {
             if (califEst1[j][i]<min)
             {
@@ -143,14 +160,14 @@ int main (int argc, char *argv[])
     //----------------------CALIFICACIONES
     printf("** Calificaciones de %s **\n\n", estudiantes[0]);
 
-    for (int i = 0; i < numMaterias; i++)
+    for (int i = 0; i < NUM_MATERIAS; i++)
     {
         printf("%-25s", materias[i]);
     }
 
     printf("\n");
 
-    for (int i = 0; i < numMaterias; i++) 
+    for (int i = 0; i < NUM_MATERIAS; i++) 
     {
         for (int j = 0; j < 22; j++) {
             printf("-");
@@ -159,9 +176,9 @@ int main (int argc, char *argv[])
 
     printf("\n");
 
-    for (int i = 0; i < numCalif; i++)
+    for (int i = 0; i < NUM_CALIF; i++)
     {      
-        for (int j = 0; j < numMaterias; j++)
+        for (int j = 0; j < NUM_MATERIAS; j++)
         {
             printf("%-25.2f", califEst1[i][j]);
         }
@@ -171,7 +188,7 @@ int main (int argc, char *argv[])
     
     //----------------------PROMEDIO POR MATERIA
 
-    for (int i = 0; i < numMaterias; i++) 
+    for (int i = 0; i < NUM_MATERIAS; i++) 
     {
         for (int j = 0; j < 22; j++) {
             printf("-");
@@ -183,7 +200,7 @@ int main (int argc, char *argv[])
     printf("Promedio Por Materia:\n");
 
 
-    for (int i = 0; i < numMaterias; i++)
+    for (int i = 0; i < NUM_MATERIAS; i++)
     {
          printf("%-25s%.2f\n", materias[i], promMateriasEst1[i]);
     }
@@ -194,7 +211,7 @@ int main (int argc, char *argv[])
     //----------------------PROMEDIO GENERAL
 
 
-    for (int i = 0; i < numMaterias; i++) 
+    for (int i = 0; i < NUM_MATERIAS; i++) 
     {
         for (int j = 0; j < 22; j++) {
             printf("-");
@@ -209,7 +226,7 @@ int main (int argc, char *argv[])
 
     //----------------------CALIFICACIÓN MIN POR MATERIA
 
-    for (int i = 0; i < numMaterias; i++) 
+    for (int i = 0; i < NUM_MATERIAS; i++) 
     {
         for (int j = 0; j < 22; j++) {
             printf("-");
@@ -221,7 +238,7 @@ int main (int argc, char *argv[])
     printf("Calificacion Minima Por Materia:\n");
 
 
-    for (int i = 0; i < numMaterias; i++)
+    for (int i = 0; i < NUM_MATERIAS; i++)
     {
          printf("%-25s%.2f\n", materias[i], califMinEst1[i]);
     }
@@ -229,7 +246,7 @@ int main (int argc, char *argv[])
 
     //----------------------CALIFICACIÓN MAX POR MATERIA
 
-    for (int i = 0; i < numMaterias; i++) 
+    for (int i = 0; i < NUM_MATERIAS; i++) 
     {
         for (int j = 0; j < 22; j++) {
             printf("-");
@@ -241,7 +258,7 @@ int main (int argc, char *argv[])
     printf("Calificacion Maxima Por Materia:\n");
 
 
-    for (int i = 0; i < numMaterias; i++)
+    for (int i = 0; i < NUM_MATERIAS; i++)
     {
          printf("%-25s%.2f\n", materias[i], califMaxEst1[i]);
     }
@@ -250,7 +267,7 @@ int main (int argc, char *argv[])
     //----------------------CALIFICACIÓN MIN GENERAL
 
 
-    for (int i = 0; i < numMaterias; i++) 
+    for (int i = 0; i < NUM_MATERIAS; i++) 
     {
         for (int j = 0; j < 22; j++) {
             printf("-");
@@ -266,7 +283,7 @@ int main (int argc, char *argv[])
     //----------------------CALIFICACIÓN MAX GENERAL
 
 
-    for (int i = 0; i < numMaterias; i++) 
+    for (int i = 0; i < NUM_MATERIAS; i++) 
     {
         for (int j = 0; j < 22; j++) {
             printf("-");
@@ -278,7 +295,7 @@ int main (int argc, char *argv[])
     printf("%-25s%.2f\n", "Calif Max General:", maxEst1);
 
 
-    for (int i = 0; i < numMaterias; i++) 
+    for (int i = 0; i < NUM_MATERIAS; i++) 
     {
         for (int j = 0; j < 22; j++) {
             printf("-");
@@ -289,4 +306,160 @@ int main (int argc, char *argv[])
     
 
     return 0;
+}
+
+void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], 
+                        char materi[NUM_MATERIAS][ESPACIO_CADENA], 
+                        float califiEstud[NUM_CALIF][NUM_MATERIAS],
+                        float promMaterEst[NUM_MATERIAS],
+                        float promEs,
+                        float califMinEst[NUM_MATERIAS],
+                        float califMaxEst[NUM_MATERIAS],
+                        float minEst,
+                        float maxEst);
+{
+    //----------------------CALIFICACIONES
+    printf("** Calificaciones de %s **\n\n", estudiantes[0]);
+
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        printf("%-25s", materias[i]);
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < NUM_MATERIAS; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < NUM_CALIF; i++)
+    {      
+        for (int j = 0; j < NUM_MATERIAS; j++)
+        {
+            printf("%-25.2f", califEst1[i][j]);
+        }
+        printf("\n");
+    
+    }
+    
+    //----------------------PROMEDIO POR MATERIA
+
+    for (int i = 0; i < NUM_MATERIAS; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("Promedio Por Materia:\n");
+
+
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+         printf("%-25s%.2f\n", materias[i], promMateriasEst1[i]);
+    }
+
+
+    
+
+    //----------------------PROMEDIO GENERAL
+
+
+    for (int i = 0; i < NUM_MATERIAS; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("%-25s%.2f\n", "Promedio General:", promEst1);
+
+
+
+    //----------------------CALIFICACIÓN MIN POR MATERIA
+
+    for (int i = 0; i < NUM_MATERIAS; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("Calificacion Minima Por Materia:\n");
+
+
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+         printf("%-25s%.2f\n", materias[i], califMinEst1[i]);
+    }
+    
+
+    //----------------------CALIFICACIÓN MAX POR MATERIA
+
+    for (int i = 0; i < NUM_MATERIAS; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("Calificacion Maxima Por Materia:\n");
+
+
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+         printf("%-25s%.2f\n", materias[i], califMaxEst1[i]);
+    }
+
+
+    //----------------------CALIFICACIÓN MIN GENERAL
+
+
+    for (int i = 0; i < NUM_MATERIAS; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("%-25s%.2f\n", "Calif Min General:", minEst1);
+
+
+
+    //----------------------CALIFICACIÓN MAX GENERAL
+
+
+    for (int i = 0; i < NUM_MATERIAS; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("%-25s%.2f\n", "Calif Max General:", maxEst1);
+
+
+    for (int i = 0; i < NUM_MATERIAS; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
 }
