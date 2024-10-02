@@ -3,8 +3,10 @@
 
 int main (int argc, char *argv[]) 
 {
-    const int numEstudiantes = 5, numMaterias = 3, espacioCadena = 21;
+    const int numEstudiantes = 2, numMaterias = 1, numCalif=6, espacioCadena = 21;
     int longitudCadena, limpiadorBuffer;
+
+    float califEst1[numCalif][numMaterias];
 
     char estudiantes[numEstudiantes][espacioCadena], materias[numMaterias][espacioCadena];
 
@@ -51,6 +53,44 @@ int main (int argc, char *argv[])
             materias[i][longitudCadena-1] = '\0';
         }
     }
+
+    for (int i = 0; i < numMaterias; i++)
+    {
+        printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", materias[i]);
+
+        for (int j = 0; j < numEstudiantes; j++)
+        {
+            printf("-------------- Ingrese las calificaciones de %s\n", estudiantes[j]);
+            
+            for (int h = 0; h < numCalif; h++)
+            {
+                printf("Aqui de nuevo\n");
+                scanf("%f", &califEst1[h][i]);
+
+                if (califEst1[h][i]>10 || califEst1[h][i]<0)
+                {
+                    printf("Calificación ingresada fuera de rango.\n");
+                    h--;
+                }
+            }
+        }
+    }
+
+    printf("%s\n", estudiantes[0]);
+    for (int i = 0; i < numMaterias; i++)
+    {
+        for (int j = 0; j < califEst1; j++)
+        {
+            printf("%s\t", materias[i]);
+            printf("%.2f\t", califEst1[i][j]);
+        }
+    }
+
+
+
+
+    
+    
     
 
 
