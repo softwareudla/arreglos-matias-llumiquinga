@@ -7,9 +7,9 @@ int main (int argc, char *argv[])
     int longitudCadena, limpiadorBuffer;
 
     float   califEst1[numCalif][numMaterias], promMateriasEst1[filasResultados][numMaterias],
-            califMinEst1[filasResultados][numMaterias];
+            califMinEst1[filasResultados][numMaterias],califMaxEst1[filasResultados][numMaterias];
 
-    float promEst1=0, califMin=10, califMax=0;
+    float promEst1=0, min=10, max=0;
 
     char estudiantes[numEstudiantes][espacioCadena], materias[numMaterias][espacioCadena];
 
@@ -70,17 +70,56 @@ int main (int argc, char *argv[])
             {
                 printf("Calificación ingresada fuera de rango.\n");
                 j--;
-            }else
-            {
-                promMateriasEst1[filasResultados][i]= promMateriasEst1[filasResultados][i]+califEst1[j][i];
             }
         }
-        promMateriasEst1[filasResultados][i]=promMateriasEst1[filasResultados][i]/numCalif;
 
-        promEst1 = promEst1 + promMateriasEst1[filasResultados][i];
+    }
+
+    //----------------------CÁLCULO DE PROMEDIOS
+    for (int i = 0; i < numMaterias; i++)
+    {
+        for (int j = 0; j < numCalif; j++)
+        {
+            promMateriasEst1[filasResultados-1][i]= promMateriasEst1[filasResultados-1][i]+califEst1[j][i];
+        }
+        promMateriasEst1[filasResultados-1][i]=promMateriasEst1[filasResultados-1][i]/numCalif;
+
+        promEst1 = promEst1 + promMateriasEst1[filasResultados-1][i];
     }
 
         promEst1 =promEst1/numMaterias;
+
+
+
+
+    //----------------------CÁLCULO DE MIN Y MAX
+    for (int i = 0; i < numMaterias; i++)
+    {
+        min=10;
+        max=0;
+
+        for (int j = 0; j < numCalif; j++)
+        {
+            if (califEst1[j][i]<min)
+            {
+                min = califEst1[j][i];
+                califMinEst1[filasResultados-1][i]=min;
+            }
+            if (califEst1[j][i]>max)
+            {
+                max = califEst1[j][i];
+                califMaxEst1[filasResultados-1][i]= max;
+            }
+            /*printf("minimo1,5: %.2f\n", min);
+            printf("MAX: %.2f\n", califMaxEst1[filasResultados-1][i]);
+            printf("MIN: %.2f\n", califMinEst1[filasResultados-1][i]); --problema
+            printf("minimo2: %.2f\n", min);*/
+        }       
+    }
+
+
+
+
 
 
 
@@ -124,7 +163,7 @@ int main (int argc, char *argv[])
 
     printf("\n");
 
-    printf("Promedio por materia\n");
+    printf("Promedio Por Materia\n");
 
 
     for (int i = 0; i < numMaterias; i++) 
@@ -138,7 +177,7 @@ int main (int argc, char *argv[])
 
     for (int i = 0; i < numMaterias; i++)
     {      
-        printf("%-25.2f", promMateriasEst1[filasResultados][i]);
+        printf("%-25.2f", promMateriasEst1[filasResultados-1][i]);
     }
     printf("\n");
     
@@ -166,6 +205,64 @@ int main (int argc, char *argv[])
         }
     }
 
+    //----------------------CALIFICACIÓN MIN POR MATERIA
+
+    for (int i = 0; i < numMaterias; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("Calificacion Minima Por Materia\n");
+
+
+    for (int i = 0; i < numMaterias; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < numMaterias; i++)
+    {      
+        printf("%-25.2f", califMinEst1[filasResultados-1][i]);
+    }
+    printf("\n");
+
+    //----------------------CALIFICACIÓN MAX POR MATERIA
+
+    for (int i = 0; i < numMaterias; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("Calificacion Maxima Por Materia\n");
+
+
+    for (int i = 0; i < numMaterias; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < numMaterias; i++)
+    {      
+        printf("%-25.2f", califMaxEst1[filasResultados-1][i]);
+    }
+    printf("\n");
+    
 
     
 
