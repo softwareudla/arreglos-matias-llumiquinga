@@ -7,7 +7,7 @@
 #define ESPACIO_CADENA 21
 
 
-void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], 
+void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst,
                         char materi[NUM_MATERIAS][ESPACIO_CADENA], 
                         float califiEstud[NUM_CALIF][NUM_MATERIAS],
                         float promMaterEst[NUM_MATERIAS],
@@ -85,7 +85,7 @@ int main (int argc, char *argv[])
 
             if (califEst1[j][i] > 10 || califEst1[j][i] < 0)
             {
-                printf("Calificación ingresada fuera de rango.\n");
+                printf("Calificacion ingresada fuera de rango.\n");
                 j--;
             }
         }
@@ -99,13 +99,14 @@ int main (int argc, char *argv[])
         {
             promMateriasEst1[i]= promMateriasEst1[i]+califEst1[j][i];
         }
+        //printf("-----------------%.2f\n", promMateriasEst1[i]);
         promMateriasEst1[i]=promMateriasEst1[i]/NUM_CALIF;
+        //printf("-----------------%.2f\n", promMateriasEst1[i]);
 
         promEst1 = promEst1 + promMateriasEst1[i];
     }
 
-        promEst1 =promEst1/NUM_MATERIAS;
-
+    promEst1 =promEst1/NUM_MATERIAS;
 
 
 
@@ -152,163 +153,15 @@ int main (int argc, char *argv[])
     
 
 
+    ImprimirResultados( estudiantes, 0, materias, califEst1, 
+                        promMateriasEst1, promEst1, califMinEst1, 
+                        califMaxEst1, minEst1,maxEst1);
 
-
-
-
-
-    //----------------------CALIFICACIONES
-    printf("** Calificaciones de %s **\n\n", estudiantes[0]);
-
-    for (int i = 0; i < NUM_MATERIAS; i++)
-    {
-        printf("%-25s", materias[i]);
-    }
-
-    printf("\n");
-
-    for (int i = 0; i < NUM_MATERIAS; i++) 
-    {
-        for (int j = 0; j < 22; j++) {
-            printf("-");
-        }
-    }
-
-    printf("\n");
-
-    for (int i = 0; i < NUM_CALIF; i++)
-    {      
-        for (int j = 0; j < NUM_MATERIAS; j++)
-        {
-            printf("%-25.2f", califEst1[i][j]);
-        }
-        printf("\n");
-    
-    }
-    
-    //----------------------PROMEDIO POR MATERIA
-
-    for (int i = 0; i < NUM_MATERIAS; i++) 
-    {
-        for (int j = 0; j < 22; j++) {
-            printf("-");
-        }
-    }
-
-    printf("\n");
-
-    printf("Promedio Por Materia:\n");
-
-
-    for (int i = 0; i < NUM_MATERIAS; i++)
-    {
-         printf("%-25s%.2f\n", materias[i], promMateriasEst1[i]);
-    }
-
-
-    
-
-    //----------------------PROMEDIO GENERAL
-
-
-    for (int i = 0; i < NUM_MATERIAS; i++) 
-    {
-        for (int j = 0; j < 22; j++) {
-            printf("-");
-        }
-    }
-
-    printf("\n");
-
-    printf("%-25s%.2f\n", "Promedio General:", promEst1);
-
-
-
-    //----------------------CALIFICACIÓN MIN POR MATERIA
-
-    for (int i = 0; i < NUM_MATERIAS; i++) 
-    {
-        for (int j = 0; j < 22; j++) {
-            printf("-");
-        }
-    }
-
-    printf("\n");
-
-    printf("Calificacion Minima Por Materia:\n");
-
-
-    for (int i = 0; i < NUM_MATERIAS; i++)
-    {
-         printf("%-25s%.2f\n", materias[i], califMinEst1[i]);
-    }
-    
-
-    //----------------------CALIFICACIÓN MAX POR MATERIA
-
-    for (int i = 0; i < NUM_MATERIAS; i++) 
-    {
-        for (int j = 0; j < 22; j++) {
-            printf("-");
-        }
-    }
-
-    printf("\n");
-
-    printf("Calificacion Maxima Por Materia:\n");
-
-
-    for (int i = 0; i < NUM_MATERIAS; i++)
-    {
-         printf("%-25s%.2f\n", materias[i], califMaxEst1[i]);
-    }
-
-
-    //----------------------CALIFICACIÓN MIN GENERAL
-
-
-    for (int i = 0; i < NUM_MATERIAS; i++) 
-    {
-        for (int j = 0; j < 22; j++) {
-            printf("-");
-        }
-    }
-
-    printf("\n");
-
-    printf("%-25s%.2f\n", "Calif Min General:", minEst1);
-
-
-
-    //----------------------CALIFICACIÓN MAX GENERAL
-
-
-    for (int i = 0; i < NUM_MATERIAS; i++) 
-    {
-        for (int j = 0; j < 22; j++) {
-            printf("-");
-        }
-    }
-
-    printf("\n");
-
-    printf("%-25s%.2f\n", "Calif Max General:", maxEst1);
-
-
-    for (int i = 0; i < NUM_MATERIAS; i++) 
-    {
-        for (int j = 0; j < 22; j++) {
-            printf("-");
-        }
-    }
-    
-
-    
 
     return 0;
 }
 
-void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], 
+void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst,
                         char materi[NUM_MATERIAS][ESPACIO_CADENA], 
                         float califiEstud[NUM_CALIF][NUM_MATERIAS],
                         float promMaterEst[NUM_MATERIAS],
@@ -316,14 +169,14 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA],
                         float califMinEst[NUM_MATERIAS],
                         float califMaxEst[NUM_MATERIAS],
                         float minEst,
-                        float maxEst);
+                        float maxEst)
 {
     //----------------------CALIFICACIONES
-    printf("** Calificaciones de %s **\n\n", estudiantes[0]);
+    printf("** Calificaciones de %s **\n\n", estudiant[numEst]);
 
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
-        printf("%-25s", materias[i]);
+        printf("%-25s", materi[i]);
     }
 
     printf("\n");
@@ -341,7 +194,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA],
     {      
         for (int j = 0; j < NUM_MATERIAS; j++)
         {
-            printf("%-25.2f", califEst1[i][j]);
+            printf("%-25.2f", califiEstud[i][j]);
         }
         printf("\n");
     
@@ -363,7 +216,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA],
 
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
-         printf("%-25s%.2f\n", materias[i], promMateriasEst1[i]);
+         printf("%-25s%.2f\n", materi[i], promMaterEst[i]);
     }
 
 
@@ -381,7 +234,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA],
 
     printf("\n");
 
-    printf("%-25s%.2f\n", "Promedio General:", promEst1);
+    printf("%-25s%.2f\n", "Promedio General:", promEs);
 
 
 
@@ -401,7 +254,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA],
 
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
-         printf("%-25s%.2f\n", materias[i], califMinEst1[i]);
+         printf("%-25s%.2f\n", materi[i], califMinEst[i]);
     }
     
 
@@ -421,7 +274,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA],
 
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
-         printf("%-25s%.2f\n", materias[i], califMaxEst1[i]);
+         printf("%-25s%.2f\n", materi[i], califMaxEst[i]);
     }
 
 
@@ -437,7 +290,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA],
 
     printf("\n");
 
-    printf("%-25s%.2f\n", "Calif Min General:", minEst1);
+    printf("%-25s%.2f\n", "Calif Min General:", minEst);
 
 
 
@@ -453,7 +306,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA],
 
     printf("\n");
 
-    printf("%-25s%.2f\n", "Calif Max General:", maxEst1);
+    printf("%-25s%.2f\n", "Calif Max General:", maxEst);
 
 
     for (int i = 0; i < NUM_MATERIAS; i++) 
