@@ -3,10 +3,13 @@
 
 int main (int argc, char *argv[]) 
 {
-    const int numEstudiantes = 2, numMaterias = 1, numCalif=6, espacioCadena = 21;
+    const int numEstudiantes = 2, numMaterias = 2, numCalif=6, espacioCadena = 21, filasResultados=1;
     int longitudCadena, limpiadorBuffer;
 
-    float califEst1[numCalif][numMaterias];
+    float   califEst1[numCalif][numMaterias], promMateriasEst1[filasResultados][numMaterias],
+            califMinEst1[filasResultados][numMaterias];
+
+    float promEst1=0, califMin=10, califMax=0;
 
     char estudiantes[numEstudiantes][espacioCadena], materias[numMaterias][espacioCadena];
 
@@ -54,58 +57,116 @@ int main (int argc, char *argv[])
         }
     }
 
+
+    printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", estudiantes[0]);
     for (int i = 0; i < numMaterias; i++)
     {
-        printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", materias[i]);
-
-        for (int j = 0; j < numEstudiantes; j++)
+        printf("-------------- Ingrese las calificaciones de %s\n", materias[i]);
+        for (int j = 0; j < numCalif; j++)
         {
-            printf("-------------- Ingrese las calificaciones de %s\n", estudiantes[j]);
-            
-            for (int h = 0; h < numCalif; h++)
-            {
-                printf("Aqui de nuevo\n");
-                scanf("%f", &califEst1[h][i]);
+            scanf("%f", &califEst1[j][i]);
 
-                if (califEst1[h][i]>10 || califEst1[h][i]<0)
-                {
-                    printf("Calificación ingresada fuera de rango.\n");
-                    h--;
-                }
+            if (califEst1[j][i] > 10 || califEst1[j][i] < 0)
+            {
+                printf("Calificación ingresada fuera de rango.\n");
+                j--;
+            }else
+            {
+                promMateriasEst1[filasResultados][i]= promMateriasEst1[filasResultados][i]+califEst1[j][i];
             }
         }
+        promMateriasEst1[filasResultados][i]=promMateriasEst1[filasResultados][i]/numCalif;
+
+        promEst1 = promEst1 + promMateriasEst1[filasResultados][i];
     }
 
-    printf("%s\n", estudiantes[0]);
+        promEst1 =promEst1/numMaterias;
+
+
+
+    //----------------------CALIFICACIONES
+    printf("** Calificaciones de %s **\n\n", estudiantes[0]);
+
     for (int i = 0; i < numMaterias; i++)
     {
-        for (int j = 0; j < califEst1; j++)
+        printf("%-25s", materias[i]);
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < numMaterias; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < numCalif; i++)
+    {      
+        for (int j = 0; j < numMaterias; j++)
         {
-            printf("%s\t", materias[i]);
-            printf("%.2f\t", califEst1[i][j]);
+            printf("%-25.2f", califEst1[i][j]);
+        }
+        printf("\n");
+    
+    }
+    
+    //----------------------PROMEDIO POR MATERIA
+
+    for (int i = 0; i < numMaterias; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("Promedio por materia\n");
+
+
+    for (int i = 0; i < numMaterias; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < numMaterias; i++)
+    {      
+        printf("%-25.2f", promMateriasEst1[filasResultados][i]);
+    }
+    printf("\n");
+    
+
+    //----------------------PROMEDIO ESTUADIANTE
+
+
+    for (int i = 0; i < numMaterias; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    printf("%-25s", "Promedio General:");
+    printf("%-25.2f\n", promEst1);
+
+
+    for (int i = 0; i < numMaterias; i++) 
+    {
+        for (int j = 0; j < 22; j++) {
+            printf("-");
         }
     }
 
 
-
-
-    
-    
-    
-
-
-
-
-    
-    for (int i = 0; i < numEstudiantes; i++)
-    {
-        printf("%s\n", estudiantes[i]);
-    }
-    
-    for (int i = 0; i < numMaterias; i++)
-    {
-        printf("%s\n", materias[i]);
-    }
     
 
     return 0;
