@@ -3,12 +3,15 @@
 
 int main (int argc, char *argv[]) 
 {
-    const int numestudiantes = 5, espacioCadena = 21;
+    const int numEstudiantes = 5, espacioCadena = 21;
     int longitudCadena, limpiadorBuffer;
 
-    char    estudiantes[numestudiantes][espacioCadena];    
+    char estudiantes[numEstudiantes][espacioCadena];
 
-    for (int i = 0; i < numestudiantes; i++)
+
+    printf("------------------------REGISTRO DE NOMBRES DE ESTUDIANTES------------------------\n");
+
+    for (int i = 0; i < numEstudiantes; i++)
     {
         printf("Ingrese el nombre y apellido o solo el nombre del estudiante %d (MAX 20 caracteres):\n", i+1);
         fflush(stdin);
@@ -21,17 +24,19 @@ int main (int argc, char *argv[])
             printf("Se ha superado el maximo de 20 caracteres\n");
             i--;
 
-            while ((limpiadorBuffer = getchar()) != '\n' && limpiadorBuffer != EOF);
+            while ((limpiadorBuffer = getchar()) != '\n' && limpiadorBuffer != EOF); //limpia el buffer de entrada
+        }else{
+            estudiantes[i][longitudCadena-1] = '\0';
         }
 
-
-
-
     }
+    
+
+
 
     for (int i = 0; i < 5; i++)
     {
-        printf("%s", estudiantes[i]);
+        printf("%s\n", estudiantes[i]);
     }
     
     
