@@ -4,6 +4,7 @@
 #define NUM_MATERIAS 3
 #define NUM_CALIF 3
 #define ESPACIO_CADENA 21
+#define NUM_MATERIAS_ESTUDIANTES (NUM_MATERIAS*NUM_ESTUDIANTES)
 
 int main (int argc, char *argv[]) 
 {
@@ -11,20 +12,27 @@ int main (int argc, char *argv[])
 
     int longitudCadena=0, limpiadorBuffer=0, aprobados=0, reprobados=0, contadorEst=0, saltoColumCalif=0;
 
-    float  promGenerales[NUM_ESTUDIANTES], califMinGenerales[NUM_ESTUDIANTES], califMaxGenenerales[NUM_ESTUDIANTES];
+    float  promGenerales[NUM_ESTUDIANTES], califMinGenerales[NUM_ESTUDIANTES], califMaxGenerales[NUM_ESTUDIANTES];
 
-    float   califPorMateria[NUM_CALIF][NUM_MATERIAS*NUM_ESTUDIANTES], 
+    float   califPorMateria[NUM_CALIF][NUM_MATERIAS_ESTUDIANTES], 
             promPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS], 
             califMinPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS],
             califMaxPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS];
 
     for (int i = 0; i < NUM_CALIF; i++)
     {
-        for (int j = 0; j < NUM_MATERIAS; j++)
+        for (int j = 0; j < NUM_MATERIAS_ESTUDIANTES; j++)
         {
             califPorMateria[i][j]=0;
+        }
+    }
+
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        for (int j = 0; j < NUM_MATERIAS; j++)
+        {
             promPorMateria[i][j]=0;
-            califMinPorMateria[i][j]=0;
+            califMinPorMateria[i][j]=10;
             califMaxPorMateria[i][j]=0;
         }
     }
@@ -32,7 +40,7 @@ int main (int argc, char *argv[])
     for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
         califMinGenerales[i] = 10;
-        califMaxGenenerales[i] = 0;
+        califMaxGenerales[i] = 0;
         promGenerales[i] = 0;
     }
 
@@ -107,16 +115,16 @@ int main (int argc, char *argv[])
     while ((contadorEst + 1) <= NUM_ESTUDIANTES)
     {
 
-        for (int i = 0; i < NUM_MATERIAS; i++)
+        for (int i = saltoColumCalif; i < NUM_MATERIAS*(contadorEst+1); i++)
         {
-            for (int j = saltoColumCalif; j < NUM_MATERIAS * (contadorEst + 1); j++)
+            for (int j = 0; j < NUM_CALIF; j++)
             {
-                promPorMateria[contadorEst][i] = promPorMateria[contadorEst][i] + califPorMateria[j][i];
+                promPorMateria[contadorEst][i-saltoColumCalif] = promPorMateria[contadorEst][i-saltoColumCalif] + califPorMateria[j][i];
             }
 
-            promPorMateria[contadorEst][i] = promPorMateria[contadorEst][i] / NUM_CALIF;
+            promPorMateria[contadorEst][i-saltoColumCalif] = promPorMateria[contadorEst][i-saltoColumCalif] / NUM_CALIF;
 
-            promGenerales[contadorEst] = promGenerales[contadorEst] + promPorMateria[contadorEst][i];
+            promGenerales[contadorEst] = promGenerales[contadorEst] + promPorMateria[contadorEst][i-saltoColumCalif];
         }
 
         promGenerales[contadorEst] = promGenerales[contadorEst] / NUM_MATERIAS;
@@ -128,6 +136,46 @@ int main (int argc, char *argv[])
     contadorEst=0;
     saltoColumCalif=0;
 
+    while ((contadorEst + 1) <= NUM_ESTUDIANTES)
+    {
+        for (int i = saltoColumCalif; i < NUM_MATERIAS*(contadorEst+1); i++)
+        {
+            for (int j = 0; j < NUM_CALIF; j++)
+            {
+                if (califPorMateria[j][i] < califMinPorMateria[contadorEst][i-saltoColumCalif])
+                {
+                    califMinPorMateria[contadorEst][i-saltoColumCalif] = califPorMateria[j][i];
+                }
+                if (califPorMateria[j][i] > califMaxPorMateria[contadorEst][i-saltoColumCalif])
+                {
+                    califMaxPorMateria[contadorEst][i-saltoColumCalif] = califPorMateria[j][i];
+                }
+            }
+        }
+
+        for (int i = saltoColumCalif; i < NUM_MATERIAS*(contadorEst+1); i++)
+        {
+            for (int j = 0; j < NUM_CALIF; j++)
+            {
+                if (califPorMateria[j][i] < califMinGenerales[contadorEst])
+                {
+                    califMinGenerales[contadorEst] = califPorMateria[j][i];
+                }
+                if (califPorMateria[j][i] > califMaxGenerales[contadorEst])
+                {
+                    califMaxGenerales[contadorEst] = califPorMateria[j][i];
+                }
+            }
+        }
+
+        contadorEst++;
+        saltoColumCalif = NUM_MATERIAS * contadorEst;
+    }
+
+    contadorEst=0;
+    saltoColumCalif=0;
+
+    //-----------------------------------------IMPRIMIR CALIFICACIONES
     while ((contadorEst + 1) <= NUM_ESTUDIANTES)
     {
 
@@ -160,6 +208,75 @@ int main (int argc, char *argv[])
         contadorEst++;
         saltoColumCalif=NUM_MATERIAS*contadorEst;
     }
+
+    contadorEst=0;
+    saltoColumCalif=0;
+
+    //---------------------Impresion Promedios
+
+    printf("------------Promedios por materias\n");
+
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        for (int j = 0; j < NUM_MATERIAS; j++)
+        {
+            printf("%.2f\t", promPorMateria[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("------------Promedios generales\n");
+
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        printf("%.2f\t",  promGenerales[i]);
+    }
+    printf("\n");
+
+
+
+    //---------------------Impresion Min Max
+
+    printf("------------Min\n");
+
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        for (int j = 0; j < NUM_MATERIAS; j++)
+        {
+            printf("%.2f\t", califMinPorMateria[i][j]);
+        }
+        printf("\n");
+    }
+    printf("------------Max\n");
+
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        for (int j = 0; j < NUM_MATERIAS; j++)
+        {
+            printf("%.2f\t", califMaxPorMateria[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("------------Min generales\n");
+
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        printf("%.2f\t",  califMinGenerales[i]);
+    }
+    printf("\n");
+
+    printf("------------Max generales\n");
+
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        printf("%.2f\t",  califMaxGenerales[i]);
+    }
+    
+
+    
+
+
 
     return 0;
 }
