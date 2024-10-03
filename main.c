@@ -29,14 +29,20 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
 
 int main (int argc, char *argv[]) 
 {
+    char estudiantes[NUM_ESTUDIANTES][ESPACIO_CADENA], materias[NUM_MATERIAS][ESPACIO_CADENA];
+
     int longitudCadena, limpiadorBuffer;
+
+
 
     float   califEst1[NUM_CALIF][NUM_MATERIAS], 
             promMateriasEst1[NUM_MATERIAS], califMinEst1[NUM_MATERIAS],califMaxEst1[NUM_MATERIAS], promGenerales[NUM_ESTUDIANTES];
 
-    float minEst1=0, maxEst1=0, min, max;
+    float   minEst1=10, maxEst1=0;
 
-    char estudiantes[NUM_ESTUDIANTES][ESPACIO_CADENA], materias[NUM_MATERIAS][ESPACIO_CADENA];
+
+
+
 
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
@@ -102,44 +108,33 @@ int main (int argc, char *argv[])
     //----------------------CÁLCULO DE MIN Y MAX
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
-        min=10;
-        max=0;
-
         for (int j = 0; j < NUM_CALIF; j++)
         {
-            if (califEst1[j][i]<min)
+            if (califEst1[j][i]<califMinEst1[i])
             {
-                min = califEst1[j][i];
-                califMinEst1[i]=min;
+                califMinEst1[i]=califEst1[j][i];
             }
-            if (califEst1[j][i]>max)
+            if (califEst1[j][i]>califMaxEst1[i])
             {
-                max = califEst1[j][i];
-                califMaxEst1[i]= max;
+                califMaxEst1[i]=califEst1[j][i];
             }
         }       
     }
-
-    min=10;
-    max=0;
 
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
         for (int j = 0; j < NUM_CALIF; j++)
         {
-            if (califEst1[j][i]<min)
+            if (califEst1[j][i]<minEst1)
             {
-                min = califEst1[j][i];
-                minEst1=min;
+                minEst1=califEst1[j][i];
             }
-            if (califEst1[j][i]>max)
+            if (califEst1[j][i]>maxEst1)
             {
-                max = califEst1[j][i];
-                maxEst1= max;
+                maxEst1=califEst1[j][i];
             }
         }   
     }
-    
 
 
     ImprimirResultados( estudiantes, 0, materias, califEst1, 
