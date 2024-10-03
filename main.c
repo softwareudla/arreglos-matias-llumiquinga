@@ -7,9 +7,9 @@
 #define ESPACIO_CADENA 21
 
 
-void RegistrarCalificaciones(   char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst, 
+void RegistrarCalificaciones(   float califEst[NUM_CALIF][NUM_MATERIAS], int numEst, 
                                 char materia[NUM_MATERIAS][ESPACIO_CADENA],
-                                float califEst[NUM_CALIF][NUM_MATERIAS]);
+                                char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA]);
 
 void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst,
                         char materi[NUM_MATERIAS][ESPACIO_CADENA], 
@@ -85,7 +85,8 @@ int main (int argc, char *argv[])
         }
     }
 
-    RegistrarCalificaciones(estudiantes,0,materias, califEst1);
+    RegistrarCalificaciones(califEst1,0,materias, estudiantes);
+
 
 
     //----------------------CÁLCULO DE PROMEDIOS
@@ -160,9 +161,9 @@ int main (int argc, char *argv[])
 
 
 
-void RegistrarCalificaciones(   char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst, 
+void RegistrarCalificaciones(   float califEst[NUM_CALIF][NUM_MATERIAS], int numEst, 
                                 char materia[NUM_MATERIAS][ESPACIO_CADENA],
-                                float califEst[NUM_CALIF][NUM_MATERIAS])
+                                char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA])
 {
     printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", estudiant[0]);
     for (int i = 0; i < NUM_MATERIAS; i++)
