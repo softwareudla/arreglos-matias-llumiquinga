@@ -23,13 +23,19 @@ int main (int argc, char *argv[])
 {
     int longitudCadena, limpiadorBuffer;
 
-    float   califEst1[NUM_CALIF][NUM_MATERIAS], promMateriasEst1[NUM_MATERIAS],
-            califMinEst1[NUM_MATERIAS],califMaxEst1[NUM_MATERIAS];
+    float   califEst1[NUM_CALIF][NUM_MATERIAS], 
+            promMateriasEst1[NUM_MATERIAS], califMinEst1[NUM_MATERIAS],califMaxEst1[NUM_MATERIAS];
 
     float promEst1=0, minEst1=0, maxEst1=0, min, max;
 
     char estudiantes[NUM_ESTUDIANTES][ESPACIO_CADENA], materias[NUM_MATERIAS][ESPACIO_CADENA];
 
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        promMateriasEst1[i] = 0;
+        califMinEst1[i] = 10;
+        califMaxEst1[i] = 0;
+    }
 
     printf("----------------------------- REGISTRO DE ESTUDIANTES ----------------------------\n");
 
@@ -99,9 +105,8 @@ int main (int argc, char *argv[])
         {
             promMateriasEst1[i]= promMateriasEst1[i]+califEst1[j][i];
         }
-        //printf("-----------------%.2f\n", promMateriasEst1[i]);
+
         promMateriasEst1[i]=promMateriasEst1[i]/NUM_CALIF;
-        //printf("-----------------%.2f\n", promMateriasEst1[i]);
 
         promEst1 = promEst1 + promMateriasEst1[i];
     }
@@ -249,12 +254,14 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
 
     printf("\n");
 
-    printf("Calificacion Minima Por Materia:\n");
+    printf("Calif Min Por Materia:\n");
+    
 
 
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
          printf("%-25s%.2f\n", materi[i], califMinEst[i]);
+         fflush(stdout);
     }
     
 
@@ -269,7 +276,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
 
     printf("\n");
 
-    printf("Calificacion Maxima Por Materia:\n");
+    printf("Calif Max Por Materia:\n");
 
 
     for (int i = 0; i < NUM_MATERIAS; i++)
