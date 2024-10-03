@@ -22,8 +22,8 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
                         float promGenera[NUM_ESTUDIANTES],
                         float califMinEst[NUM_MATERIAS],
                         float califMaxEst[NUM_MATERIAS],
-                        float minEst,
-                        float maxEst);
+                        float minEst[NUM_ESTUDIANTES],
+                        float maxEst[NUM_ESTUDIANTES]);
 
 
 
@@ -36,10 +36,9 @@ int main (int argc, char *argv[])
 
 
     float   califEst1[NUM_CALIF][NUM_MATERIAS], 
-            promMateriasEst1[NUM_MATERIAS], califMinEst1[NUM_MATERIAS],califMaxEst1[NUM_MATERIAS], promGenerales[NUM_ESTUDIANTES];
-
-    float   minEst1=10, maxEst1=0;
-
+            promMateriasEst1[NUM_MATERIAS], califMinEst1[NUM_MATERIAS],califMaxEst1[NUM_MATERIAS];
+            
+    float   promGenerales[NUM_ESTUDIANTES], calfMinGenerales[NUM_ESTUDIANTES], calfMaxGenenerales[NUM_ESTUDIANTES];
 
 
 
@@ -49,6 +48,8 @@ int main (int argc, char *argv[])
         promMateriasEst1[i] = 0;
         califMinEst1[i] = 10;
         califMaxEst1[i] = 0;
+        calfMinGenerales[i] = 10;
+        calfMaxGenenerales[i] = 0;
         promGenerales[i] = 0;
     }
 
@@ -125,13 +126,13 @@ int main (int argc, char *argv[])
     {
         for (int j = 0; j < NUM_CALIF; j++)
         {
-            if (califEst1[j][i]<minEst1)
+            if (califEst1[j][i]<calfMinGenerales[0])
             {
-                minEst1=califEst1[j][i];
+                calfMinGenerales[0]=califEst1[j][i];
             }
-            if (califEst1[j][i]>maxEst1)
+            if (califEst1[j][i]>calfMaxGenenerales[0])
             {
-                maxEst1=califEst1[j][i];
+                calfMaxGenenerales[0]=califEst1[j][i];
             }
         }   
     }
@@ -139,7 +140,7 @@ int main (int argc, char *argv[])
 
     ImprimirResultados( estudiantes, 0, materias, califEst1, 
                         promMateriasEst1, promGenerales, califMinEst1, 
-                        califMaxEst1, minEst1,maxEst1);
+                        califMaxEst1, calfMinGenerales,calfMaxGenenerales);
     
 
     return 0;
@@ -215,8 +216,8 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
                         float promGenera[NUM_ESTUDIANTES],
                         float califMinEst[NUM_MATERIAS],
                         float califMaxEst[NUM_MATERIAS],
-                        float minEst,
-                        float maxEst)
+                        float minEst[NUM_ESTUDIANTES],
+                        float maxEst[NUM_ESTUDIANTES])
 {
     //----------------------CALIFICACIONES
     printf("** Calificaciones de %s **\n\n", estudiant[numEst]);
@@ -339,7 +340,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
 
     printf("\n");
 
-    printf("%-25s%.2f\n", "Calif Min General:", minEst);
+    printf("%-25s%.2f\n", "Calif Min General:", minEst[numEst]);
 
 
 
@@ -355,7 +356,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
 
     printf("\n");
 
-    printf("%-25s%.2f\n", "Calif Max General:", maxEst);
+    printf("%-25s%.2f\n", "Calif Max General:", maxEst[numEst]);
 
 
     for (int i = 0; i < NUM_MATERIAS; i++) 
