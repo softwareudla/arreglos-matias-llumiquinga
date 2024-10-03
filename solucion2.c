@@ -1,10 +1,14 @@
 #include <stdio.h>
+#include <string.h>
 
 #define NUM_ESTUDIANTES 5
 #define NUM_MATERIAS 3
 #define NUM_CALIF 3
 #define ESPACIO_CADENA 22
 #define NUM_MATERIAS_ESTUDIANTES (NUM_MATERIAS*NUM_ESTUDIANTES)
+
+void ImprimirSeparadores();
+void ImprimirMateriasConEspacio(char materia[NUM_MATERIAS][ESPACIO_CADENA]);
 
 int main (int argc, char *argv[]) 
 {
@@ -251,24 +255,45 @@ int main (int argc, char *argv[])
     contadorEst=0;
     saltoColumCalif=0;
 
-    //---------------------Impresion Promedios
 
-    printf("------------Promedios por materias\n");
+
+
+    //---------------------Impresion Promedios
+    
+    ImprimirSeparadores();
+    printf("PROMEDIOS POR MATERIAS\n");
+    
+
+    
+    ImprimirMateriasConEspacio(materias);
+
+    ImprimirSeparadores();
 
     for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
+        printf("%-22s", estudiantes[i]);
         for (int j = 0; j < NUM_MATERIAS; j++)
         {
-            printf("%.2f\t", promPorMateria[i][j]);
+            printf("%-22.2f", promPorMateria[i][j]);
         }
         printf("\n");
     }
 
-    printf("------------Promedios generales\n");
+    ImprimirSeparadores();
+    printf("PROMEDIOS GENERALES\n");
+
 
     for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
-        printf("%.2f\t",  promGenerales[i]);
+        printf("%-22s",  estudiantes[i]);
+    }
+    
+    printf("\n");
+    ImprimirSeparadores();
+
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        printf("%-22.2f",  promGenerales[i]);
     }
     printf("\n");
 
@@ -344,4 +369,27 @@ int main (int argc, char *argv[])
         printf("%-25.2f", reprobadosPorMateria[i]);
     }
     return 0;
+}
+
+void ImprimirSeparadores()
+{
+    for (int i = 0; i < NUM_MATERIAS+1; i++)
+    {
+        for (int j = 0; j < 22; j++)
+        {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+}
+
+void ImprimirMateriasConEspacio(char materia[NUM_MATERIAS][ESPACIO_CADENA])
+{
+    printf("%-22s", "");
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        printf("%-22s", materia[i]);
+    }
+    printf("\n");
 }
