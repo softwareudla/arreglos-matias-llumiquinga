@@ -44,6 +44,18 @@ int main (int argc, char *argv[])
 
     float   califEst1[NUM_CALIF][NUM_MATERIAS], 
             promMateriasEst1[NUM_MATERIAS], califMinEst1[NUM_MATERIAS],califMaxEst1[NUM_MATERIAS];
+
+    float   califEst2[NUM_CALIF][NUM_MATERIAS], 
+            promMateriasEst2[NUM_MATERIAS], califMinEst2[NUM_MATERIAS],califMaxEst2[NUM_MATERIAS];
+
+    float   califEst3[NUM_CALIF][NUM_MATERIAS], 
+            promMateriasEst3[NUM_MATERIAS], califMinEst3[NUM_MATERIAS],califMaxEst3[NUM_MATERIAS];
+
+    float   califEst4[NUM_CALIF][NUM_MATERIAS], 
+            promMateriasEst4[NUM_MATERIAS], califMinEst4[NUM_MATERIAS],califMaxEst4[NUM_MATERIAS];
+
+    float   califEst5[NUM_CALIF][NUM_MATERIAS], 
+            promMateriasEst5[NUM_MATERIAS], califMinEst5[NUM_MATERIAS],califMaxEst5[NUM_MATERIAS];
             
 
 
@@ -103,11 +115,9 @@ int main (int argc, char *argv[])
     }
 
 
-
+    //-------------------------------------ESTUDIANTE 1
     RegistrarCalificaciones(califEst1,0,materias, estudiantes);
-
     CalcularPromedios(promGenerales,0,promMateriasEst1,califEst1);
-
     CalcularMinMax(califEst1, califMinEst1, califMaxEst1,califMinGenerales,califMaxGenenerales);
 
 
@@ -141,6 +151,7 @@ void RegistrarCalificaciones(   float califEst[NUM_CALIF][NUM_MATERIAS], int num
         }
     }
 }
+
 
 
 
@@ -207,16 +218,6 @@ void CalcularMinMax(    float califEst[NUM_CALIF][NUM_MATERIAS],
 
 
 
-
-
-
-
-
-
-
-
-
-
 void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst,
                         char materi[NUM_MATERIAS][ESPACIO_CADENA], 
                         float califiEstud[NUM_CALIF][NUM_MATERIAS],
@@ -228,7 +229,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
                         float maxEst[NUM_ESTUDIANTES])
 {
     //----------------------CALIFICACIONES
-    printf("** Calificaciones de %s **\n\n", estudiant[numEst]);
+    printf("\n\n** Calificaciones de %s **\n\n", estudiant[numEst]);
 
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
