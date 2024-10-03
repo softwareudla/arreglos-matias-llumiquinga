@@ -7,6 +7,10 @@
 #define ESPACIO_CADENA 21
 
 
+void RegistrarCalificaciones(   char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst, 
+                                char materia[NUM_MATERIAS][ESPACIO_CADENA],
+                                float califEst[NUM_CALIF][NUM_MATERIAS]);
+
 void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst,
                         char materi[NUM_MATERIAS][ESPACIO_CADENA], 
                         float califiEstud[NUM_CALIF][NUM_MATERIAS],
@@ -81,23 +85,8 @@ int main (int argc, char *argv[])
         }
     }
 
+    RegistrarCalificaciones(estudiantes,0,materias, califEst1);
 
-    printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", estudiantes[0]);
-    for (int i = 0; i < NUM_MATERIAS; i++)
-    {
-        printf("-------------- Ingrese las calificaciones de %s\n", materias[i]);
-        for (int j = 0; j < NUM_CALIF; j++)
-        {
-            scanf("%f", &califEst1[j][i]);
-
-            if (califEst1[j][i] > 10 || califEst1[j][i] < 0)
-            {
-                printf("Calificacion ingresada fuera de rango.\n");
-                j--;
-            }
-        }
-
-    }
 
     //----------------------CÁLCULO DE PROMEDIOS
     for (int i = 0; i < NUM_MATERIAS; i++)
@@ -168,6 +157,48 @@ int main (int argc, char *argv[])
 
     return 0;
 }
+
+
+
+void RegistrarCalificaciones(   char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst, 
+                                char materia[NUM_MATERIAS][ESPACIO_CADENA],
+                                float califEst[NUM_CALIF][NUM_MATERIAS])
+{
+    printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", estudiant[0]);
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        printf("-------------- Ingrese las calificaciones de %s\n", materia[i]);
+        for (int j = 0; j < NUM_CALIF; j++)
+        {
+            scanf("%f", &califEst[j][i]);
+
+            if (califEst[j][i] > 10 || califEst[j][i] < 0)
+            {
+                printf("Calificacion ingresada fuera de rango.\n");
+                j--;
+            }
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst,
                         char materi[NUM_MATERIAS][ESPACIO_CADENA], 
