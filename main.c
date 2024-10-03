@@ -11,6 +11,10 @@ void RegistrarCalificaciones(   float califEst[NUM_CALIF][NUM_MATERIAS], int num
                                 char materia[NUM_MATERIAS][ESPACIO_CADENA],
                                 char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA]);
 
+void CalcularPromedios( float promGeneral[NUM_ESTUDIANTES], int numEst, 
+                        float promMateriasEst[NUM_MATERIAS],
+                        float califEst[NUM_CALIF][NUM_MATERIAS]);
+
 void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int numEst,
                         char materi[NUM_MATERIAS][ESPACIO_CADENA], 
                         float califiEstud[NUM_CALIF][NUM_MATERIAS],
@@ -85,26 +89,13 @@ int main (int argc, char *argv[])
         }
     }
 
+
+
     RegistrarCalificaciones(califEst1,0,materias, estudiantes);
 
+    CalcularPromedios(promGenerales,0,promMateriasEst1,califEst1);
 
 
-    //----------------------CÁLCULO DE PROMEDIOS
-    for (int i = 0; i < NUM_MATERIAS; i++)
-    {
-        for (int j = 0; j < NUM_CALIF; j++)
-        {
-            promMateriasEst1[i]= promMateriasEst1[i]+califEst1[j][i];
-        }
-
-        promMateriasEst1[i]=promMateriasEst1[i]/NUM_CALIF;
-
-        promGenerales[0] = promGenerales[0] + promMateriasEst1[i];
-    }
-
-    promGenerales[0] = promGenerales[0]/NUM_MATERIAS;
-
-    
 
 
 
@@ -186,7 +177,28 @@ void RegistrarCalificaciones(   float califEst[NUM_CALIF][NUM_MATERIAS], int num
 
 
 
+void CalcularPromedios( float promGeneral[NUM_ESTUDIANTES], int numEst, 
+                        float promMateriasEst[NUM_MATERIAS],
+                        float califEst[NUM_CALIF][NUM_MATERIAS])
+{
 
+    //----------------------CÁLCULO DE PROMEDIOS
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        for (int j = 0; j < NUM_CALIF; j++)
+        {
+            promMateriasEst[i]= promMateriasEst[i]+califEst[j][i];
+        }
+
+        promMateriasEst[i]=promMateriasEst[i]/NUM_CALIF;
+
+        promGeneral[numEst] = promGeneral[numEst] + promMateriasEst[i];
+    }
+
+    promGeneral[numEst] = promGeneral[numEst]/NUM_MATERIAS;
+
+
+}
 
 
 
