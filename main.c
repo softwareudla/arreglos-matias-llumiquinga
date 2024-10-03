@@ -11,7 +11,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
                         char materi[NUM_MATERIAS][ESPACIO_CADENA], 
                         float califiEstud[NUM_CALIF][NUM_MATERIAS],
                         float promMaterEst[NUM_MATERIAS],
-                        float promEs,
+                        float promGenera[NUM_ESTUDIANTES],
                         float califMinEst[NUM_MATERIAS],
                         float califMaxEst[NUM_MATERIAS],
                         float minEst,
@@ -24,9 +24,9 @@ int main (int argc, char *argv[])
     int longitudCadena, limpiadorBuffer;
 
     float   califEst1[NUM_CALIF][NUM_MATERIAS], 
-            promMateriasEst1[NUM_MATERIAS], califMinEst1[NUM_MATERIAS],califMaxEst1[NUM_MATERIAS];
+            promMateriasEst1[NUM_MATERIAS], califMinEst1[NUM_MATERIAS],califMaxEst1[NUM_MATERIAS], promGenerales[NUM_ESTUDIANTES];
 
-    float promEst1=0, minEst1=0, maxEst1=0, min, max;
+    float minEst1=0, maxEst1=0, min, max;
 
     char estudiantes[NUM_ESTUDIANTES][ESPACIO_CADENA], materias[NUM_MATERIAS][ESPACIO_CADENA];
 
@@ -35,6 +35,7 @@ int main (int argc, char *argv[])
         promMateriasEst1[i] = 0;
         califMinEst1[i] = 10;
         califMaxEst1[i] = 0;
+        promGenerales[i] = 0;
     }
 
     printf("----------------------------- REGISTRO DE ESTUDIANTES ----------------------------\n");
@@ -108,10 +109,12 @@ int main (int argc, char *argv[])
 
         promMateriasEst1[i]=promMateriasEst1[i]/NUM_CALIF;
 
-        promEst1 = promEst1 + promMateriasEst1[i];
+        promGenerales[0] = promGenerales[0] + promMateriasEst1[i];
     }
 
-    promEst1 =promEst1/NUM_MATERIAS;
+    promGenerales[0] = promGenerales[0]/NUM_MATERIAS;
+
+    
 
 
 
@@ -159,9 +162,9 @@ int main (int argc, char *argv[])
 
 
     ImprimirResultados( estudiantes, 0, materias, califEst1, 
-                        promMateriasEst1, promEst1, califMinEst1, 
+                        promMateriasEst1, promGenerales, califMinEst1, 
                         califMaxEst1, minEst1,maxEst1);
-
+    
 
     return 0;
 }
@@ -170,7 +173,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
                         char materi[NUM_MATERIAS][ESPACIO_CADENA], 
                         float califiEstud[NUM_CALIF][NUM_MATERIAS],
                         float promMaterEst[NUM_MATERIAS],
-                        float promEs,
+                        float promGenera[NUM_ESTUDIANTES],
                         float califMinEst[NUM_MATERIAS],
                         float califMaxEst[NUM_MATERIAS],
                         float minEst,
@@ -239,7 +242,7 @@ void ImprimirResultados(char estudiant[NUM_ESTUDIANTES][ESPACIO_CADENA], int num
 
     printf("\n");
 
-    printf("%-25s%.2f\n", "Promedio General:", promEs);
+    printf("%-25s%.2f\n", "Promedio General:", promGenera[numEst]);
 
 
 
