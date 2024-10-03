@@ -10,14 +10,19 @@ int main (int argc, char *argv[])
 {
     char estudiantes[NUM_ESTUDIANTES][ESPACIO_CADENA], materias[NUM_MATERIAS][ESPACIO_CADENA];
 
-    int longitudCadena=0, limpiadorBuffer=0, aprobados=0, reprobados=0, contadorEst=0, saltoColumCalif=0;
+    int longitudCadena=0, limpiadorBuffer=0, contadorEst=0, saltoColumCalif=0;
 
     float  promGenerales[NUM_ESTUDIANTES], califMinGenerales[NUM_ESTUDIANTES], califMaxGenerales[NUM_ESTUDIANTES];
 
-    float   califPorMateria[NUM_CALIF][NUM_MATERIAS_ESTUDIANTES], 
+    float   califPorMateria[NUM_CALIF][NUM_MATERIAS_ESTUDIANTES],
+
             promPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS], 
             califMinPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS],
-            califMaxPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS];
+            califMaxPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS],
+
+            aprobadosPorMateria[NUM_MATERIAS],
+            reprobadosPorMateria[NUM_MATERIAS];
+
 
     for (int i = 0; i < NUM_CALIF; i++)
     {
@@ -36,6 +41,13 @@ int main (int argc, char *argv[])
             califMaxPorMateria[i][j]=0;
         }
     }
+
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        reprobadosPorMateria[i]=0;
+        aprobadosPorMateria[i]=0;
+    }
+    
 
     for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
@@ -89,7 +101,7 @@ int main (int argc, char *argv[])
     }
 
 
-
+    //---------------------------------------REGISTRO DE CALIFICACIONES
     while ((contadorEst+1) <= NUM_ESTUDIANTES)
     {
         printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", estudiantes[contadorEst]);
@@ -117,7 +129,7 @@ int main (int argc, char *argv[])
 
 
 
-
+    //---------------------------------------CALCULO PROMEDIO
     while ((contadorEst + 1) <= NUM_ESTUDIANTES)
     {
 
@@ -145,7 +157,7 @@ int main (int argc, char *argv[])
 
 
 
-
+    //---------------------------------------CALCULO MIN Y MAX
     while ((contadorEst + 1) <= NUM_ESTUDIANTES)
     {
         for (int i = saltoColumCalif; i < NUM_MATERIAS*(contadorEst+1); i++)
@@ -184,6 +196,23 @@ int main (int argc, char *argv[])
 
     contadorEst=0;
     saltoColumCalif=0;
+
+    //---------------------------------------CALCULO APROBADOS REPROBADOS
+
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        for (int j = 0; j < NUM_MATERIAS; j++)
+        {
+            if (promPorMateria[i][j]>=6)
+            {
+                aprobadosPorMateria[j]++;
+            }else{
+                reprobadosPorMateria[j]++;
+            }
+        }
+        printf("\n");
+    }
+
 
     //-----------------------------------------IMPRIMIR CALIFICACIONES
     while ((contadorEst + 1) <= NUM_ESTUDIANTES)
@@ -283,5 +312,36 @@ int main (int argc, char *argv[])
         printf("%.2f\t",  califMaxGenerales[i]);
     }
 
+    printf("\n");
+
+
+    //---------------------Impresion Aprobados y Reprobados
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        printf("%-25s", materias[i]);
+    }
+    printf("\n");
+
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        for (int j = 0; j < 22; j++)
+        {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        printf("%-25.2f", aprobadosPorMateria[i]);
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < NUM_MATERIAS; i++)
+    {
+        printf("%-25.2f", reprobadosPorMateria[i]);
+    }
     return 0;
 }
