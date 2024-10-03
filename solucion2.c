@@ -3,7 +3,7 @@
 #define NUM_ESTUDIANTES 5
 #define NUM_MATERIAS 3
 #define NUM_CALIF 3
-#define ESPACIO_CADENA 21
+#define ESPACIO_CADENA 22
 #define NUM_MATERIAS_ESTUDIANTES (NUM_MATERIAS*NUM_ESTUDIANTES)
 
 int main (int argc, char *argv[]) 
@@ -52,7 +52,7 @@ int main (int argc, char *argv[])
     {
         printf("Ingrese el nombre y apellido o solo el nombre del estudiante %d (MAX 20 caracteres):\n", i+1);
         fflush(stdin);
-        fgets(estudiantes[i], ESPACIO_CADENA+1, stdin);  //se suma 1 porque fgets deja un espacio para \0 además de \n  ....'\n''\0'
+        fgets(estudiantes[i], ESPACIO_CADENA, stdin);
         
         longitudCadena = strlen(estudiantes[i]);
 
@@ -88,6 +88,8 @@ int main (int argc, char *argv[])
         }
     }
 
+
+
     while ((contadorEst+1) <= NUM_ESTUDIANTES)
     {
         printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", estudiantes[contadorEst]);
@@ -112,6 +114,10 @@ int main (int argc, char *argv[])
     contadorEst=0;
     saltoColumCalif=0;
 
+
+
+
+
     while ((contadorEst + 1) <= NUM_ESTUDIANTES)
     {
 
@@ -135,6 +141,10 @@ int main (int argc, char *argv[])
 
     contadorEst=0;
     saltoColumCalif=0;
+
+
+
+
 
     while ((contadorEst + 1) <= NUM_ESTUDIANTES)
     {
@@ -272,11 +282,6 @@ int main (int argc, char *argv[])
     {
         printf("%.2f\t",  califMaxGenerales[i]);
     }
-    
-
-    
-
-
 
     return 0;
 }
