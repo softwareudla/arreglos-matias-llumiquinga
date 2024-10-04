@@ -119,7 +119,7 @@ int main (int argc, char *argv[])
         printf("--------------------------- REGISTRO DE CALIFICACIONES DE %s\n", estudiantes[contadorEst]);
         for (int i = saltoColumCalif; i < NUM_MATERIAS*(contadorEst+1); i++)
         {
-            printf("-------------- Ingrese las calificaciones de %s\n", materias[i-saltoColumCalif]);
+            printf("-------------- Ingrese las calificaciones de %s (0-10)\n", materias[i-saltoColumCalif]);
             for (int j = 0; j < NUM_CALIF; j++)
             {
                 scanf("%f", &califPorMateria[j][i]);
