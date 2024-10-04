@@ -3,7 +3,7 @@
 
 #define NUM_ESTUDIANTES 5
 #define NUM_MATERIAS 3
-#define NUM_CALIF 1
+#define NUM_CALIF 3
 #define ESPACIO_CADENA 22
 #define NUM_MATERIAS_ESTUDIANTES (NUM_MATERIAS*NUM_ESTUDIANTES)
 
@@ -11,7 +11,8 @@
 #define SEPARACION_CADENAS_ALINEACION -22
 #define CANTIDAD_DE_DECIMALES 2
 
-void ImprimirSeparadores();
+void ImprimirSeparadoresMaterias();
+void ImprimirSeparadoresEstudiantes();
 void ImprimirMateriasConEspacio(char materia[NUM_MATERIAS][ESPACIO_CADENA]);
 void ImprimirNombres_Notas(char estuadiante[NUM_ESTUDIANTES][ESPACIO_CADENA], float califEstudiante[NUM_ESTUDIANTES][NUM_MATERIAS]);
 void ImprimirValoresGenerales(float notasGenerales[NUM_ESTUDIANTES]);
@@ -29,9 +30,9 @@ int main (int argc, char *argv[])
 
             promPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS], 
             califMinPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS],
-            califMaxPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS],
+            califMaxPorMateria[NUM_ESTUDIANTES][NUM_MATERIAS];
 
-            aprobadosPorMateria[NUM_MATERIAS],
+    int     aprobadosPorMateria[NUM_MATERIAS],
             reprobadosPorMateria[NUM_MATERIAS];
 
 
@@ -236,7 +237,7 @@ int main (int argc, char *argv[])
         }
         printf("\n");
 
-        ImprimirSeparadores();
+        ImprimirSeparadoresMaterias();
 
         for (int i = 0; i < NUM_CALIF; i++)
         {
@@ -249,7 +250,7 @@ int main (int argc, char *argv[])
         contadorEst++;
         saltoColumCalif=NUM_MATERIAS*contadorEst;
 
-        ImprimirSeparadores();
+        ImprimirSeparadoresMaterias();
     }
 
     contadorEst=0;
@@ -262,117 +263,99 @@ int main (int argc, char *argv[])
     //---------------------Impresion Promedios
     printf("\n\n\n");
     printf("PROMEDIOS POR MATERIAS:\n\n");
-    
     ImprimirMateriasConEspacio(materias);
-    ImprimirSeparadores();
+    ImprimirSeparadoresMaterias();
+    ImprimirNombres_Notas(estudiantes, promPorMateria);
+    ImprimirSeparadoresMaterias();
 
-
-   ImprimirNombres_Notas(estudiantes, promPorMateria);
-
-    ImprimirSeparadores();
     printf("\n");
     printf("PROMEDIOS GENERALES:\n\n");
-
-
-
-    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
-    {
-        printf("%*s", SEPARACION_CADENAS_ALINEACION, estudiantes[i]);
-    }
-    printf("\n");*/
     ImprimirNombresColumnas(estudiantes);
-
-    ImprimirSeparadores();
-
-    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
-    {
-        printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES,  promGenerales[i]);
-    }*/
-   ImprimirValoresGenerales(promGenerales);
+    ImprimirSeparadoresEstudiantes();
+    ImprimirValoresGenerales(promGenerales);
+    ImprimirSeparadoresEstudiantes();
 
 
 
     //---------------------Impresion Min Max
 
-    printf("\n\n\n");
+    printf("\n\n");
     printf("NOTAS MINIMAS POR MATERIAS:\n\n");
-
     ImprimirMateriasConEspacio(materias);
-    ImprimirSeparadores();
+    ImprimirSeparadoresMaterias();
+    ImprimirNombres_Notas(estudiantes,califMinPorMateria);
+    ImprimirSeparadoresMaterias();
 
-
-
-   ImprimirNombres_Notas(estudiantes,califMinPorMateria);
-
-    printf("\n\n\n");
-    printf("NOTAS MAXIMAS POR MATERIAS:\n\n");
-
-    ImprimirMateriasConEspacio(materias);
-    ImprimirSeparadores();
-
-   ImprimirNombres_Notas(estudiantes,califMaxPorMateria);
-
-
+    printf("\n");
     printf("NOTAS MINIMAS GENERALES:\n\n");
     ImprimirNombresColumnas(estudiantes);
+    ImprimirSeparadoresEstudiantes();
     ImprimirValoresGenerales(califMinGenerales);
+    ImprimirSeparadoresEstudiantes();
 
-    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
-    {
-        printf("%.2f\t",  califMinGenerales[i]);
-    }
-    printf("\n");*/
+    printf("\n\n");
+    printf("NOTAS MAXIMAS POR MATERIAS:\n\n");
+    ImprimirMateriasConEspacio(materias);
+    ImprimirSeparadoresMaterias();
+    ImprimirNombres_Notas(estudiantes,califMaxPorMateria);
+    ImprimirSeparadoresMaterias();
 
-    printf("NOTAS MINIMAS GENERALES:\n\n");
+    printf("\n");
+    printf("NOTAS MAXIMAS GENERALES:\n\n");
     ImprimirNombresColumnas(estudiantes);
+    ImprimirSeparadoresEstudiantes();
     ImprimirValoresGenerales(califMaxGenerales);
+    ImprimirSeparadoresEstudiantes();
 
-    /*printf("------------Max generales\n");
-
-    for (int i = 0; i < NUM_ESTUDIANTES; i++)
-    {
-        printf("%.2f\t",  califMaxGenerales[i]);
-    }*/
 
 
 
     //---------------------Impresion Aprobados y Reprobados
-    for (int i = 0; i < NUM_MATERIAS; i++)
-    {
-        printf("%-25s", materias[i]);
-    }
-    printf("\n");
+    printf("\n\n");
 
+    printf("APROBADOS-REPROBADOS POR MATERIAS:\n\n");
+    ImprimirMateriasConEspacio(materias);
+    ImprimirSeparadoresMaterias();
+
+    printf("%*s", SEPARACION_CADENAS_ALINEACION, "APROBADOS");
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
-        for (int j = 0; j < 22; j++)
-        {
-            printf("-");
-        }
+        printf("%*i", SEPARACION_CADENAS_ALINEACION, aprobadosPorMateria[i]);
     }
 
     printf("\n");
 
+    printf("%*s", SEPARACION_CADENAS_ALINEACION, "REPROBADOS");
     for (int i = 0; i < NUM_MATERIAS; i++)
     {
-        printf("%-25.2f", aprobadosPorMateria[i]);
+        printf("%*i", SEPARACION_CADENAS_ALINEACION, reprobadosPorMateria[i]);
     }
 
     printf("\n");
+    ImprimirSeparadoresMaterias();
 
-    for (int i = 0; i < NUM_MATERIAS; i++)
-    {
-        printf("%-25.2f", reprobadosPorMateria[i]);
-    }
     return 0;
 }
 
 
 
 
-void ImprimirSeparadores()
+void ImprimirSeparadoresMaterias()
 {
     for (int i = 0; i < NUM_MATERIAS+1; i++)
+    {
+        for (int j = 0; j < SEPARACION_CADENAS; j++)
+        {
+            printf("-");
+        }
+    }
+
+    printf("\n");
+}
+
+void ImprimirSeparadoresEstudiantes()
+{
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
         for (int j = 0; j < SEPARACION_CADENAS; j++)
         {
