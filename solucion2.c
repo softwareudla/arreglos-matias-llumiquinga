@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+
 #define NUM_ESTUDIANTES 5
 #define NUM_MATERIAS 3
 #define NUM_CALIF 3
