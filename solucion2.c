@@ -14,6 +14,8 @@
 void ImprimirSeparadores();
 void ImprimirMateriasConEspacio(char materia[NUM_MATERIAS][ESPACIO_CADENA]);
 void ImprimirNombres_Notas(char estuadiante[NUM_ESTUDIANTES][ESPACIO_CADENA], float califEstudiante[NUM_ESTUDIANTES][NUM_MATERIAS]);
+void ImprimirValoresGenerales(float notasGenerales[NUM_ESTUDIANTES]);
+void ImprimirNombresColumnas(char estuadiante[NUM_ESTUDIANTES][ESPACIO_CADENA]);
 
 int main (int argc, char *argv[]) 
 {
@@ -273,18 +275,20 @@ int main (int argc, char *argv[])
 
 
 
-    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
         printf("%*s", SEPARACION_CADENAS_ALINEACION, estudiantes[i]);
     }
-    
-    printf("\n");
+    printf("\n");*/
+    ImprimirNombresColumnas(estudiantes);
+
     ImprimirSeparadores();
 
-    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
         printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES,  promGenerales[i]);
-    }
+    }*/
+   ImprimirValoresGenerales(promGenerales);
 
 
 
@@ -306,28 +310,30 @@ int main (int argc, char *argv[])
     ImprimirMateriasConEspacio(materias);
     ImprimirSeparadores();
 
-
-
    ImprimirNombres_Notas(estudiantes,califMaxPorMateria);
 
 
+    printf("NOTAS MINIMAS GENERALES:\n\n");
+    ImprimirNombresColumnas(estudiantes);
+    ImprimirValoresGenerales(califMinGenerales);
 
-    printf("------------Min generales\n");
-
-    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
         printf("%.2f\t",  califMinGenerales[i]);
     }
-    printf("\n");
+    printf("\n");*/
 
-    printf("------------Max generales\n");
+    printf("NOTAS MINIMAS GENERALES:\n\n");
+    ImprimirNombresColumnas(estudiantes);
+    ImprimirValoresGenerales(califMaxGenerales);
+
+    /*printf("------------Max generales\n");
 
     for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
         printf("%.2f\t",  califMaxGenerales[i]);
-    }
+    }*/
 
-    printf("\n");
 
 
     //---------------------Impresion Aprobados y Reprobados
@@ -398,4 +404,22 @@ void ImprimirNombres_Notas(char estuadiante[NUM_ESTUDIANTES][ESPACIO_CADENA], fl
         }
         printf("\n");
     }
+}
+
+void ImprimirValoresGenerales(float notasGenerales[NUM_ESTUDIANTES])
+{
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES,  notasGenerales[i]);
+    }
+    printf("\n");
+}
+
+void ImprimirNombresColumnas(char estuadiante[NUM_ESTUDIANTES][ESPACIO_CADENA])
+{
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        printf("%*s", SEPARACION_CADENAS_ALINEACION, estuadiante[i]);
+    }
+    printf("\n");
 }
