@@ -264,15 +264,6 @@ int main (int argc, char *argv[])
     ImprimirMateriasConEspacio(materias);
     ImprimirSeparadores();
 
-    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
-    {
-        printf("%*s", SEPARACION_CADENAS_ALINEACION, estudiantes[i]);
-        for (int j = 0; j < NUM_MATERIAS; j++)
-        {
-            printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES, promPorMateria[i][j]);
-        }
-        printf("\n");
-    }*/
 
    ImprimirNombres_Notas(estudiantes, promPorMateria);
 
@@ -294,7 +285,6 @@ int main (int argc, char *argv[])
     {
         printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES,  promGenerales[i]);
     }
-    //printf("\n");
 
 
 
@@ -307,29 +297,20 @@ int main (int argc, char *argv[])
     ImprimirSeparadores();
 
 
-    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
-    {
-        printf("%*s", SEPARACION_CADENAS_ALINEACION, estudiantes[i]);
-        for (int j = 0; j < NUM_MATERIAS; j++)
-        {
-            printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES, califMinPorMateria[i][j]);
-        }
-        printf("\n");
-    }*/
 
    ImprimirNombres_Notas(estudiantes,califMinPorMateria);
 
+    printf("\n\n\n");
+    printf("NOTAS MAXIMAS POR MATERIAS:\n\n");
 
-    printf("------------Max\n");
+    ImprimirMateriasConEspacio(materias);
+    ImprimirSeparadores();
 
-    for (int i = 0; i < NUM_ESTUDIANTES; i++)
-    {
-        for (int j = 0; j < NUM_MATERIAS; j++)
-        {
-            printf("%.2f\t", califMaxPorMateria[i][j]);
-        }
-        printf("\n");
-    }
+
+
+   ImprimirNombres_Notas(estudiantes,califMaxPorMateria);
+
+
 
     printf("------------Min generales\n");
 
