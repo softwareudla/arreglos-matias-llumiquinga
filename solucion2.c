@@ -13,6 +13,7 @@
 
 void ImprimirSeparadores();
 void ImprimirMateriasConEspacio(char materia[NUM_MATERIAS][ESPACIO_CADENA]);
+void ImprimirNombres_Notas(char estuadiante[NUM_ESTUDIANTES][ESPACIO_CADENA], float califEstudiante[NUM_ESTUDIANTES][NUM_MATERIAS]);
 
 int main (int argc, char *argv[]) 
 {
@@ -263,7 +264,7 @@ int main (int argc, char *argv[])
     ImprimirMateriasConEspacio(materias);
     ImprimirSeparadores();
 
-    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
         printf("%*s", SEPARACION_CADENAS_ALINEACION, estudiantes[i]);
         for (int j = 0; j < NUM_MATERIAS; j++)
@@ -271,7 +272,9 @@ int main (int argc, char *argv[])
             printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES, promPorMateria[i][j]);
         }
         printf("\n");
-    }
+    }*/
+
+   ImprimirNombres_Notas(estudiantes, promPorMateria);
 
     ImprimirSeparadores();
     printf("\n");
@@ -281,7 +284,7 @@ int main (int argc, char *argv[])
 
     for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
-        printf("%-22s",  estudiantes[i]);
+        printf("%*s", SEPARACION_CADENAS_ALINEACION, estudiantes[i]);
     }
     
     printf("\n");
@@ -289,24 +292,34 @@ int main (int argc, char *argv[])
 
     for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
-        printf("%-22.2f",  promGenerales[i]);
+        printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES,  promGenerales[i]);
     }
-    printf("\n");
+    //printf("\n");
 
 
 
     //---------------------Impresion Min Max
 
-    printf("------------Min\n");
+    printf("\n\n\n");
+    printf("NOTAS MINIMAS POR MATERIAS:\n\n");
 
-    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    ImprimirMateriasConEspacio(materias);
+    ImprimirSeparadores();
+
+
+    /*for (int i = 0; i < NUM_ESTUDIANTES; i++)
     {
+        printf("%*s", SEPARACION_CADENAS_ALINEACION, estudiantes[i]);
         for (int j = 0; j < NUM_MATERIAS; j++)
         {
-            printf("%.2f\t", califMinPorMateria[i][j]);
+            printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES, califMinPorMateria[i][j]);
         }
         printf("\n");
-    }
+    }*/
+
+   ImprimirNombres_Notas(estudiantes,califMinPorMateria);
+
+
     printf("------------Max\n");
 
     for (int i = 0; i < NUM_ESTUDIANTES; i++)
@@ -367,6 +380,9 @@ int main (int argc, char *argv[])
     return 0;
 }
 
+
+
+
 void ImprimirSeparadores()
 {
     for (int i = 0; i < NUM_MATERIAS+1; i++)
@@ -388,4 +404,17 @@ void ImprimirMateriasConEspacio(char materia[NUM_MATERIAS][ESPACIO_CADENA])
         printf("%*s", SEPARACION_CADENAS_ALINEACION, materia[i]);
     }
     printf("\n");
+}
+
+void ImprimirNombres_Notas(char estuadiante[NUM_ESTUDIANTES][ESPACIO_CADENA], float califEstudiante[NUM_ESTUDIANTES][NUM_MATERIAS])
+{
+    for (int i = 0; i < NUM_ESTUDIANTES; i++)
+    {
+        printf("%*s", SEPARACION_CADENAS_ALINEACION, estuadiante[i]);
+        for (int j = 0; j < NUM_MATERIAS; j++)
+        {
+            printf("%*.*f", SEPARACION_CADENAS_ALINEACION, CANTIDAD_DE_DECIMALES, califEstudiante[i][j]);
+        }
+        printf("\n");
+    }
 }
